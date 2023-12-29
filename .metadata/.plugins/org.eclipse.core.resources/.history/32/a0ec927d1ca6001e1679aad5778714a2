@@ -1,0 +1,7 @@
+package edu.pnu.domain;
+
+public class BoardVO {
+	private int seq;
+	private String title;
+	
+}
