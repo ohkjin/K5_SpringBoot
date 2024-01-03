@@ -1,9 +1,8 @@
 package edu.pnu.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,90 +12,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.pnu.domain.MemberVO;
+import edu.pnu.service.MemberService;
+import lombok.RequiredArgsConstructor;
 
+/*--생성자 제외 가능 Annotation 1--*/ //auto로 찾아서 연결, 대신 초기화 세팅을 할 수 없음
+@RequiredArgsConstructor 
 @RestController
 //@RequestMapping("/test") 호출시 /test/member
 public class MemberController {
-	private List<MemberVO> list;
-	public MemberController() {
-		System.out.println("success");
-		list = new  ArrayList<>();
-		for(int i = 1;i<=10;i++) {
-			list.add(MemberVO.builder()
-					.id(i)
-					.name("name"+i)
-					.pass("pass"+i)
-					.regidate(new Date()).build());
-			
-//			MemberVO vo = new MemberVO();
-//			vo.setId(i);
-//			vo.setName("name"+i);
-//			vo.setPass("pass"+i);
-//			vo.setRegidate((java.util.Date) new Date());
-//			list.add(vo);
-		}
-	}
+/*--생성자 제외 가능 Annotation 2--*/
+//	@Autowired 
+//	private MemberService ms;
+	
+	private final MemberService ms; //Annotation 1
+	
+//	private MemberService ms = new MemberService(); // 인스턴스 생성만
+//	public MemberController() { // 생성자: 값 초기화 작업
+//		ms = new MemberService();
+//	}
 
 	@PutMapping("/member/{id}")
-	public int updateMember(@PathVariable int id, @RequestBody MemberVO vo) {
-		if(id==0) return 0;
-		int idx = getIndex(id);
-		list.set(idx,vo);		
-		return 1;
+	public int updateMember(@PathVariable int id, @RequestBody MemberVO vo) {		
+		return ms.updateMember(id, vo);
 	}
 
 	@DeleteMapping("/member/{id}")
-//	http://localhost:8000/memberbyId?id=2
+//	http://localhost:8000/member/2
 	public int removeMember(@PathVariable int id) {
-		if(id==0) return 0;
-		MemberVO vo =getObject(id);
-		list.remove(vo);
-		return id;
+		return ms.removeMember(id);
 	}
 	
 	@PostMapping("/member")
 	public int addMember(@RequestBody MemberVO vo) {
-		if(vo==null) return 0;
-		int id = vo.getId();
-		if(getIndex(id)==0) {
-			list.add(vo);		
-			return 1;
-		}
-		return 0;
+		return ms.addMember(vo);
 	}
 	
-	@GetMapping("/members")
+	@GetMapping("/member")
 	public List<MemberVO> getMembers(){
-		return list;
+		return ms.getMembers();
 	}
-	
 	
 	@GetMapping("/member/{id}")
-//	http://localhost:8000/memberbyId?id=2
 	public MemberVO by(@PathVariable int id) {
-		if(id==0) return null;
-		return getObject(id);		
-	}
-	
-
-	public int getIndex(int id) {
-		if(id==0) return 0;
-		int idx =0;
-		for(MemberVO s:list) {
-			if(s.getId()==id)
-				return idx;
-			idx++;
-		}
-		return 0;		
-	}
-	
-	public MemberVO getObject(int id) {
-		if(id==0) return null;
-		for(MemberVO s:list) {
-			if(s.getId()==id)
-				return s;
-		}
-		return null;		
+		return ms.by(id);		
 	}
 	
 	

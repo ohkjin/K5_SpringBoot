@@ -36,11 +36,11 @@ public class MemberController {
 	@PutMapping("/member/{id}")
 	public int updateMember(@PathVariable int id, @RequestBody MemberVO vo) {
 		//혹은 멤버를 찾아와서 .set 을 하면 된다
-		int idx = getIndex(id);
-		if(id==0) return 0;
-		vo.setId(id);
-		vo.setRegidate(new Date());
-		list.set(idx,vo);		
+		MemberVO orivo = getObject(id);
+		if(orivo==null) return 0;
+		if(vo.getName()!=null) orivo.setName(vo.getName());
+		if(vo.getPass()!=null) orivo.setPass(vo.getPass());
+//		list.set(idx,vo);		
 		return 1;
 	}
 
