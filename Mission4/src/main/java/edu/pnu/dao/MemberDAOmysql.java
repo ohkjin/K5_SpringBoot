@@ -45,12 +45,12 @@ public class MemberDAOmysql implements MemberDAO {
 			st = con.createStatement();
 			return st.executeUpdate(sql);
 		}catch(Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}finally {
 			try {
 				if(st!=null) st.close();
 			}catch(SQLException e) {
-				e.getStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return 0;
@@ -63,12 +63,12 @@ public class MemberDAOmysql implements MemberDAO {
 			st = con.createStatement();
 			return st.executeUpdate(sql);
 		}catch(Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}finally {
 			try {
 				if(st!=null) st.close();
 			}catch(SQLException e) {
-				e.getStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return 0;
@@ -83,12 +83,12 @@ public class MemberDAOmysql implements MemberDAO {
 			st = con.createStatement();
 			return st.executeUpdate(sql);
 		}catch(Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}finally {
 			try {
 				if(st!=null) st.close();
 			}catch(SQLException e) {
-				e.getStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return 0;
