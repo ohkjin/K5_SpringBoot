@@ -67,4 +67,17 @@
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="Chapter04_JPA"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="Chapter04_JPA"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
 </section>

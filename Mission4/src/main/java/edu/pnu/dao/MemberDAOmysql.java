@@ -10,15 +10,18 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.pnu.domain.MemberVO;
 
 @Repository
 public class MemberDAOmysql implements MemberDAO {
-
+//	@Autowired 이미 생성자가 있어서 필요없다
 	private Connection con;
-	//@AutoWired : 생성자가 유일할때는 생략가능
+	@Autowired
+	private LogDAO log;
+	
 	public MemberDAOmysql(DataSource ds) throws SQLException {
 		con = ds.getConnection();
 	}
@@ -75,13 +78,22 @@ public class MemberDAOmysql implements MemberDAO {
 	}
 	
 	public int addMember(MemberVO vo) {
+		int success = 0;
 		if(vo.getName()==null||vo.getPass()==null) return 0;
 		Statement st = null;
-		String sql = " INSERT INTO member(id,name,pass)";
-			   sql+= " VALUES (" +vo.getId()+",'"+vo.getPass()+"','"+vo.getName()+"')";
+		String id1 = "";
+		String id2 = "";
+		String sql = " INSERT INTO member("+id1+"name,pass)";
+			   sql+= " VALUES (" +id2+"'"+vo.getPass()+"','"+vo.getName()+"')";
+		if(vo.getId()!=null) {
+			id1 = "id,";
+			id2 = String.valueOf(vo.getId())+",";
+		}
 		try {
 			st = con.createStatement();
-			return st.executeUpdate(sql);
+			success = st.executeUpdate(sql);
+			log.makelog("addMember",sql,success);
+			return success;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

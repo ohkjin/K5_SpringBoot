@@ -7,5 +7,5 @@ import edu.pnu.domain.LogVO;
 public interface LogDAO {
 	public List<LogVO> getLogs();
 	public LogVO getLog();
-	public int makelog();
+	public int makelog(String method,String sql,int success);
 }

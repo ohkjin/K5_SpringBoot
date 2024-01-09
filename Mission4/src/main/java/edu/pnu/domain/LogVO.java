@@ -16,5 +16,5 @@ public class LogVO {
 	private String method;
 	private String sqlstring;
 	private Date regidate;
-	private short success;
+	private int success;
 }
