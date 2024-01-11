@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor	// in need to use Builder
 @AllArgsConstructor //
 @Entity
+@Table(name="Board") //if none, name will be Board(not used often)
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +35,7 @@ public class Board {
 	private String title;
 	private String writer;
 	private String content;
-	@Temporal(TemporalType.DATE)
-	private Date createDate; //camel notation to _
+	@Temporal(TemporalType.DATE) //TemporalType.TIME(시간) TemporalType.TIMESTAMP(날짜와 시간)
+	private Date createDate; //camel notation to a_b
 	private Long cnt;
 }
