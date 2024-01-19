@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" charset="UTF-8">
+<title>Board Detail</title>
+</head>
+<body th:align="center">
+	<h1>Board Detail</h1>
+	<form th:action="@{updateBoard}" method="post">
+	<input name="seq" type="hidden" th:value="${board.seq}">
+	<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
+	<tr>
+		<td bgcolor="orange" th:text="Title" width="80"></td>
+		<td><input name="title" type="text" th:value="${board.title}"></td>
+	</tr>
+	<tr>
+		<td bgcolor="orange" th:text="Writer"></td>
+		<td th:text="${board.writer}"></td>
+	</tr>
+	<tr>
+		<td bgcolor="orange" th:text="Content"></td>
+		<td><textarea name="content" th:text="${board.content}" cols="40" rows="10"></textarea></td>
+	</tr>
+	<tr>
+		<td bgcolor="orange">Created Date</td>
+		<td th:text="${board.createDate}"></td>
+	</tr>
+	<tr>
+		<td bgcolor="orange">View Count</td>
+		<td th:text="${board.cnt}"></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="Edit">
+		</td>
+	</tr>
+	</table>
+	</form>
+<br>
+<a th:href="@{/insertBoard}">Write</a>
+<a th:href="@{/deleteBoard(seq=${board.seq})}">Delete</a>&nbsp;&nbsp;&nbsp;
+<a th:href="@{/getBoardList}">Board List</a>
+</body>
+</html>

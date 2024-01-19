@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>새 글 등록</title>
+	<meta charset="UTF-8" http-equiv="Content-Type">
+</head>
+<style>
+  	a{text-decoration: none; }
+  	th {padding: 5px;}
+	td {padding: 5px;}
+</style>
+<body th:align="center">
+	<h1>게시글 등록</h1>
+	<form th:action="insertBoard" method="post">
+		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+			<tr>
+				<td bgcolor="lavender" th:text="Title" width="80"></td>
+				<td><input name="title" type="text" size="50"></td>
+			</tr>
+			<tr>
+				<td bgcolor="lavender" th:text="Writer"></td>
+				<td><input name="writer" type="text" size="10"></td>
+			</tr>
+			<tr>
+				<td bgcolor="lavender" th:text="Content"></td>
+				<td><textarea name="content" cols="50" rows="10"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="boardSubmit">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<a th:href="@{/getBoardList}">Board List</a>
+	<a th:href="@{/insertBoard}">Write</a>
+
+</body>
+</html>
