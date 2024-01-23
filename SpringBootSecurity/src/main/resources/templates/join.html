@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Security Join Test</title>
+</head>
+<body>
+	<h2>Join Us</h2>
+	<form action="/join" method="POST">
+	<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+		<tr>
+			<td bgcolor="lavender">username:</td>
+			<td><input type="text" name="username" placeholder="Username"/></td>
+		</tr>
+		<tr>
+			<td bgcolor="lavender">password:</td>
+			<td><input type="password" name="password" placeholder="Password"/></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" value="join"/></td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Security Test</title>
+</head>
+<body>
+	<h1>Screen for those with Authentication</h1>
+	<a th:href="@{/loginSuccess}">Return</a>
+	<form action="logout" method="get">
+		<input type="submit" value="logout"/>
+	</form>
+</body>
+</html>
