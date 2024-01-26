@@ -22,6 +22,7 @@ public class Member {
 	@Enumerated(EnumType.STRING)
 //	@Builder.Default
 	private Role role;
-	private boolean enabled;
+	//객체형만 인식 (type 대문자)
+	private Boolean enabled;
 	
 }

@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
                 .anyRequest().permitAll());
 		
-		http.formLogin(frmLogin->frmLogin.disable()); // form을 이용한 로그인 사용하지 않음
+//		http.formLogin(frmLogin->frmLogin.disable()); // form을 이용한 로그인 사용하지 않음 (template 내의)
 		http.httpBasic(basic->basic.disable());		  // Http Baisc 인증 방식 사용하지 않음
 		
 		// 세션을 유지하지 않겠다고 설정 ( Url호출 뒤 응답까지 유지되지만 응답 후 삭제 )

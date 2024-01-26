@@ -15,8 +15,8 @@ public class MemberInitialize {
 
 	@Autowired
 	private MemberRepository memRepo;
-//	@Autowired
-	private PasswordEncoder encoder = new BCryptPasswordEncoder();
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	
 	@Test

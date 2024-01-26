@@ -43,14 +43,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// Security에게 로그인 요청에 필요한 객체 생성
 		Authentication authToken = new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword());
 		
-		// 인증 진행 -> UserDetailsService를 상속받은 클래스의 loadUserByUsername 호출
+		// 인증 진행 -> UserDetailsService를 상속받은 클래스(SecurityUserDetailsService.java)의 loadUserByUsername 호출
 		Authentication auth = authenticationManager.authenticate(authToken);
 		System.out.println("auth: "+auth);
 		
 		return auth;
 	}
 	
-	// 1.2 위에서 인증 성공했을 때 실행되는 후처리 메소드
+	// 1.2 위에서 인증 성공했을 때 자동으로 호출되는 후처리 메소드
+	// 인증, 인가 토큰 생성
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
