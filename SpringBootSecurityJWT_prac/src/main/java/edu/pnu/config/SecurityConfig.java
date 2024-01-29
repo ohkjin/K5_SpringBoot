@@ -14,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import edu.pnu.config.filter.JWTAuthenticationFilter;
 import edu.pnu.config.filter.JWTAuthorizationFilter;
+import edu.pnu.handler.OAuth2SuccessHandler;
 import edu.pnu.persistence.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -24,11 +25,10 @@ public class SecurityConfig {
 	
 		private final AuthenticationConfiguration authenticationConfiguration;
 		private final MemberRepository memRepo;
+		private final OAuth2SuccessHandler oAuth2SuccessHandler;
 		
-		@Bean
-		PasswordEncoder passwordEncoder() {
-			return new BCryptPasswordEncoder();
-		}
+		
+		
 		
 		@Bean
 		SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -51,6 +51,16 @@ public class SecurityConfig {
 			//Add filter after Applied FilterChain of Spring Security
 			http.addFilter(new JWTAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()));
 			http.addFilterBefore(new JWTAuthorizationFilter(memRepo), AuthorizationFilter.class);
+			
+			//Google Login -> DefaultOAuth2UserService
+			// 추가적인 작업이 필요시에 상속된 클래스의 loadUser메소드에서 하면된다
+			http.oauth2Login(oauth2->oauth2
+//					.loginPage("/login")  // 생략시 OAuth제공 로그인 페이지가 뜬다
+					.defaultSuccessUrl("/loginSuccess",true));
+			
+			//임의로 user를 생성 후 DB저장 및 Token Header에 생성
+			http.oauth2Login(oauth2->oauth2
+					.successHandler(oAuth2SuccessHandler));
 			
 			return http.build();
 		}
